@@ -12,5 +12,5 @@ $ git shortlog -s -n
   1  Marc Chung
   1  Nick Gerakines
 ```
--s neglect comments
--n sort by desc
+- -s neglect comments
+- -n sort by desc
