@@ -1,6 +1,6 @@
 find out how many times of a person in one repository.
 
-```git
+```basnh
 $ git shortlog -s -n
   135  Tom Preston-Werner
   6  remi
