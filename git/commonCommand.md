@@ -12,3 +12,16 @@ Just use the command followd:
  git checkout branchname filename
  git checkout breanchA HFFrame/Global/Global_macro.h
 ``` 
+## deploy jar to nexus
+
+```bash
+mvn clean deploy -X -Dmaven.test.skip=true
+```
+defualt is to release,if you want deploy SNAPSHOT version,please do like this:
+
+```xml
+<groupId>cc.mzone</groupId>
+<artifactId>m1</artifactId>
+<version>0.1-SNAPSHOT</version>
+<packaging>jar</packaging>
+```
