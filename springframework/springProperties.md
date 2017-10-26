@@ -12,3 +12,5 @@ context2.properties将覆盖context.properties中的值。
 
 ## 参考
 http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/htmlsingle/spring-framework-reference.html#beans-factory-overrideconfigurer
+## spring boot 启动外部配置文件，不读取默认的application.properties
+spring.config.location=location_of_your_config_file.properties
