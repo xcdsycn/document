@@ -13,4 +13,17 @@ context2.properties将覆盖context.properties中的值。
 ## 参考
 http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/htmlsingle/spring-framework-reference.html#beans-factory-overrideconfigurer
 ## spring boot 启动外部配置文件，不读取默认的application.properties
+
 spring.config.location=location_of_your_config_file.properties
+
+## spring 动态刷新配置applicationContext，也就是xml配置文件
+
+```java
+    @RequestMapping(value="refreshXmlWebApplicationContext2016}")
+    public void refresh(HttpServletRequest request){
+         XmlWebApplicationContext context =
+                 (XmlWebApplicationContext)WebApplicationContextUtils
+                 .getWebApplicationContext(request.getServletContext());
+         context.refresh();
+    }
+```
