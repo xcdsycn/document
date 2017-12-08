@@ -24,4 +24,11 @@ public class Record {
  }
 }
 ```
+## 关于 httpclient 返回 GZIP 压缩文档的问题，可以做如下设置
 
+```java
+HttpClient httpClient = HttpClients.custom()
+                .setConnectionManager(cm)
+                .disableContentCompression() //this disables compression
+                .build();
+```
