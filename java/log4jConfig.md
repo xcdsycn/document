@@ -10,4 +10,10 @@
 |按分 |'.'yyyy-MM-dd-HH-mm |/foo/bar.log |/foo/bar.log.2001-03-09-10-22|
 
 # 可以定制外部加载配置文件
-方式去 log4j 的官网找就是了。
+
+```java
+            /*
+             * BasicConfigurator replaced with PropertyConfigurator. log4j filePath
+             */
+            PropertyConfigurator.configure(configFilePath + "/log4j.properties");
+```
