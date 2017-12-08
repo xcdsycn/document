@@ -8,3 +8,6 @@
 |半天 |'.'yyyy-MM-dd-a| /foo/bar.log |/foo/bar.log.2002-03-09-AM|
 |按时 |'.'yyyy-MM-dd-HH |/foo/bar.log |/foo/bar.log.2002-03-09-10|
 |按分 |'.'yyyy-MM-dd-HH-mm |/foo/bar.log |/foo/bar.log.2001-03-09-10-22|
+
+# 可以定制外部加载配置文件
+方式去 log4j 的官网找就是了。
