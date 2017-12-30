@@ -25,3 +25,5 @@ defualt is to release,if you want deploy SNAPSHOT version,please do like this:
 <version>0.1-SNAPSHOT</version>
 <packaging>jar</packaging>
 ```
+# 拉远程分支到本地
+git checkout origin/remoteName -b localName
