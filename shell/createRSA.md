@@ -1,6 +1,6 @@
 # 生成 RSA 的方法
 
-```bash
+```shell
 # openssl
 #OpenSSL> genrsa -out app_broker_private_key.pem   1024  #生成私钥
 #OpenSSL> pkcs8 -topk8 -inform PEM -in app_broker_private_key.pem -outform PEM -nocrypt -out app_private_key_pkcs8.pem #Java开发者需要将私钥转换成PKCS8格式
