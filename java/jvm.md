@@ -88,7 +88,59 @@ java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintF
 实例
 java -Xms10g -Xmx10g -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:/var/log/myapp/gc.log -XX:+UseGCLogFileRotation -XX:GCLogFileSize=10M -XX:NumberOfGCLogFiles=20 -jar myapp.jar
 ```
+# 环境问题
+## mac下查看 jdk，java 安装 路径
+```shell
+/usr/libexec/java_home -V
+```
 
+## visualVM 监控
+
+### 开启 JMX
+如果需要监控本地的 java 程序，需要在本地的机器上开启，如果监控服务器，也需要在服务器上开启，这样远程本地都可以监控了。因为 jvm 默认是不开启JMX的。
+
+#### 开启方式
+
+```java
+ java.rmi.server.hostname=ineedabargain.com // without this, on linux, jconsole will fail to connect
+  com.sun.management.jmxremote.authenticate=false // default is true if not set
+  com.sun.management.jmxremote.password.file=<password file location>   //2
+  com.sun.management.jmxremote.ssl=false
+  com.sun.management.jmxremote.port=<portNum>
+```
+password 只有在 authenticate=true 的时候才会有用，因为这时需要提供用户名密码访问。
+
+Password file defines the password of each role/user. Only applicable if authenticate is set to true. What the actual role/user can do is defined in another file called access file. Default location/value is JRE_HOME/lib/management/jmxremote.password.
+
+#### 例子
+##### JMX Client Accesses JMX Agent without Authentication
+
+```shell
+java ⋯⋯ -Djava.rmi.server.hostname=ineedabargain.com -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1234 ⋯⋯
+```
+##### JMX Client Accesses JMX Agent with Authentication
+leave com.sun.management.jmxremote.authenticate=true, com.sun.management.jmxremote.password.file=<pwd file location>。
+具体做法
+
+```shell
+su <user that runs java app>
+cp /usr/java/default/jre/lib/management/jmxremote.password.template /home/tomcat/jmxremote.passwordcd ~
+chmod 600 jmxremote.password
+emacs jmxremote.password
+```
+
+密码文件内容
+```shell
+# specify actual password instead of the text password
+monitorRole <password>
+controlRole <password>
+```
+连接的时候使用 controlRole，因为它的权限大，可看的内容多些。
+
+#### 运行有权限开启的命令
+```sehll
+java ⋯⋯ -Djava.rmi.server.hostname=ineedabargain.com -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1234 -Dcom.sun.management.jmxremote.password.file=/home/tomcat/jmxremote.password ⋯⋯
+```
 
 
 
