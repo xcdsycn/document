@@ -142,5 +142,5 @@ controlRole <password>
 java ⋯⋯ -Djava.rmi.server.hostname=ineedabargain.com -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1234 -Dcom.sun.management.jmxremote.password.file=/home/tomcat/jmxremote.password ⋯⋯
 ```
 
-
+### 运行 visualVM 执行监控就可以了
 
