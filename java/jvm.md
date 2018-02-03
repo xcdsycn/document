@@ -76,3 +76,19 @@ Java虚拟机规范对这个区域的限制非常宽松，除了和Java堆一样
 ### 本地方法栈（Native Method Stacks）
 本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。虚拟机规范中对本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常。
 
+# jvm 参数查看
+## 要想看到JVM执行时使用在使用哪些参数以及其各参数默认值，可以使用这个命令
+```shell
+java -XX:+PrintFlagsFinal -version
+
+如果这些参数还不够全，你可以打开几个开关：
+
+java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version
+
+实例
+java -Xms10g -Xmx10g -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:/var/log/myapp/gc.log -XX:+UseGCLogFileRotation -XX:GCLogFileSize=10M -XX:NumberOfGCLogFiles=20 -jar myapp.jar
+```
+
+
+
+
