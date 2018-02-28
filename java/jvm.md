@@ -144,3 +144,6 @@ java ⋯⋯ -Djava.rmi.server.hostname=ineedabargain.com -Dcom.sun.management.jm
 
 ### 运行 visualVM 执行监控就可以了
 ## [配置参数说明](http://blog.sokolenko.me/2014/11/javavm-options-production.html)
+
+## [JVM参数之143](https://www.ibm.com/support/knowledgecenter/zh/SSYKE2_8.0.0/com.ibm.java.aix.80.doc/diag/understanding/mm_heapsizing_initial.html)
+
