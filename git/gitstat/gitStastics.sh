@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/mogo/.jenkins/workspace/core-all-ssh/
+cd /home/table/.jenkins/workspace/core-all-ssh/
 count_branch(){
 branch=$1
 source ./swich_branch.sh git checkout $branch
@@ -45,11 +45,11 @@ do
   #messages[i]="$i: $dir - 新增:$arr1,删除:$arr2,更新总计:$arr3,总代码行数：<span style='font-weight:bold'>${total[i]}</span>" 
   messages[i]="$i : $dir\t - 总代码行数：${total[i]}" 
   #messages[i]="====================================== $i:$dir-新增:"$arr1",删除:"$arr2",更新总计:"$arr3",总代码行数：${total[i]}" 
-  sql="insert into test.mogo_git(stat_date_str,stat_add,stat_sub,stat_total,module,total) values('$yestoday',$add,$sub,$cur_total,'$dir',${total[i]});";
+  sql="insert into test.table_git(stat_date_str,stat_add,stat_sub,stat_total,module,total) values('$yestoday',$add,$sub,$cur_total,'$dir',${total[i]});";
   echo "=== insert sql: $sql"
   if [ "$branch_i" -gt 0 ]
   then
-    sql="update test.mogo_git set stat_add=$add,stat_sub=$sub,stat_total=$cur_total,total=${total[i]} where stat_date_str='$yestoday' and module='$dir';"  
+    sql="update test.table_git set stat_add=$add,stat_sub=$sub,stat_total=$cur_total,total=${total[i]} where stat_date_str='$yestoday' and module='$dir';"  
     echo "=== update the day : $sql "
   fi
   $MYSQL -e "$sql"
@@ -69,13 +69,13 @@ branch_i=0
 array_modules=()
 messages=()
 plots=()
-MYSQL="mysql -h192.168.30.164 -uroot -pmogojiayou --default-character-set=utf8 -A -N"
+MYSQL="mysql -hxxx.xxx.xxx.xxxv-uyouruser -pyourpassword --default-character-set=utf8 -A -N"
 yestoday=$(date +%Y-%m-%d --date='-1 day')
 hist=$(date +%Y-%m-%d --date='-14 day')
 total=(0 0 0 0 0 0 0 )
 #clear data yestody
 email="$yestoday GIT提交代码行统计结果如下:\n"
-del_sql="delete from test.mogo_git where stat_date_str='$yestoday';"
+del_sql="delete from test.table_git where stat_date_str='$yestoday';"
 echo "=== 删除昨日数据：$del_sql"
 $MYSQL -e "$del_sql"
 
@@ -90,7 +90,7 @@ do
   email=$email"\n"$message
 done
 echo "=== 输出文本统计信息 ==="
-selectSql="select * from test.mogo_git where stat_date_str='$yestoday';"
+selectSql="select * from test.table_git where stat_date_str='$yestoday';"
 echo "=== 查询 ： $selectSql"
 yestoday_data=$($MYSQL -e "$selectSql")
 echo "=== 从数据库中查询到的数据生成统计 ==="
@@ -102,12 +102,12 @@ echo "=== 生成历史数据统计 ==="
  # dir=${dir%/}
   #his_sql="select stat_date_str,module,stat_add from mogo_git ORDER BY stat_date_str, module;"
   his_sql="select stat_date_str,(select stat_add from test.mogo_git where module='mgzf-arch' and stat_date_str=o.stat_date_str) as mgzf_arch,\
-(select stat_add from test.mogo_git where module='mgzf-cust' and stat_date_str=o.stat_date_str) as mgzf_cust,\
-(select stat_add from test.mogo_git where module='mgzf-fina' and stat_date_str=o.stat_date_str) as a_fina ,\
-(select stat_add from test.mogo_git where module='mgzf-flat' and stat_date_str=o.stat_date_str) as a_flat ,\
-(select stat_add from test.mogo_git where module='mgzf-sale' and stat_date_str=o.stat_date_str) as a_sale ,\
-(select stat_add from test.mogo_git where module='mgzf-supp' and stat_date_str=o.stat_date_str) as a_supp ,\
-(select stat_add from test.mogo_git where module='mgzf-tp' and stat_date_str=o.stat_date_str) as a_tp  
+(select stat_add from test.table_git where module='mgzf-cust' and stat_date_str=o.stat_date_str) as t_cust,\
+(select stat_add from test.table_git where module='mgzf-fina' and stat_date_str=o.stat_date_str) as a_fina ,\
+(select stat_add from test.table_git where module='mgzf-flat' and stat_date_str=o.stat_date_str) as a_flat ,\
+(select stat_add from test.table_git where module='mgzf-sale' and stat_date_str=o.stat_date_str) as a_sale ,\
+(select stat_add from test.table_git where module='mgzf-supp' and stat_date_str=o.stat_date_str) as a_supp ,\
+(select stat_add from test.table_git where module='mgzf-tp' and stat_date_str=o.stat_date_str) as a_tp  
 from test.mogo_git o group by stat_date_str ORDER BY  stat_date_str;"
   #echo "=== 查询语句: $his_sql ==="
   hist_data=$($MYSQL -e "$his_sql")
@@ -125,5 +125,5 @@ current=$(date '+%Y-%m-%d %H:%M:%S')
 #echo -e $email | mailx -s "GIT代码库提交数量统计-- $current" -a yestoday.png $pics  xcdsy@aliyun.com
 #title=`echo -e "mgzf代码码库昨日提交代码行(LOC)统计-- $current\nContent-Type: text/html;"`
 #echo -e $email | mailx  -a 'Content-Type: text/html' -s "GIT代码库提交数量统计-- $current" -a hist_git.png   xcdsy@aliyun.com
-echo -e $email | mailx   -s "GIT代码库提交数量统计-- $current" -a hist_git.png   xcdsy@aliyun.com,sc@mogoroom.com,zhugongping@mogoroom.com,guowei@mogoroom.com,wangyan@mogoroom.com,dongxuzhou@mogoroom.com,commitment@mogoroom.com,andubu@mogoroom.com,yuanbingqiu@mogoroom.com
-#echo -e $email | mailx -s "$title" xcdsy@aliyun.com,sc@mogoroom.com,zhugongping@mogoroom.com,guowei@mogoroom.com,wangyan@mogoroom.com,dongxuzhou@mogoroom.com,commitment@mogoroom.com,andubu@mogoroom.com,yuanbingqiu@mogoroom.com
+echo -e $email | mailx   -s "GIT代码库提交数量统计-- $current" -a hist_git.png   xcdsy@aliyun.com,ab@c.com
+#echo -e $email | mailx -s "$title" xcdsy@aliyun.com,ab@c.com
