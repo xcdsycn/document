@@ -26,10 +26,10 @@ mvn clean install sonar:sonar -DrunSonar
 
   git@git.mogo.com:liuxiaohui/core-comm.git
 
-转眼来蘑菇有三个月了，从『拔剑四顾心茫然』，到『三军过后尽开颜』。少不了蘑菇伙伴们的关怀与照顾。
-借着七夕节，祝我的架构组的伙伴们，生活美满，家庭幸福！
+转眼来有三个月了，从『拔剑四顾心茫然』，到『三军过后尽开颜』。少不了伙伴们的关怀与照顾。
+借着七夕节，祝我组的伙伴们，生活美满，家庭幸福！
 也感谢我的同事，工作上的支持，工作方式的引导，生活上的照顾。
-希望在以后的工作生活中，伴随着蘑菇一起前行，助力蘑菇发展！
+希望在以后的工作生活中，伴随着一起前行，助力发展！
 
 <plugin>
 
@@ -53,7 +53,7 @@ mvn clean install & mvn sonar：sonar
 # --fail-at-end 指定单元测试时如果有失败继续执行
 #   -Dmaven.test.skip=false  明确指定不跳过 测试步骤
 #  prepare-agent  准备jacoco agent，这样测试的时候可以生成代码覆盖率报告
-MAVEN_OPTS='-Xms2048m -Xmx2048m'& mvn --fail-at-end -Dmaven.test.skip=false clean org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:prepare-agent  package -Dmogoroom-version=master-SNAPSHOT -Dvic-version=master-SNAPSHOT -Dmaven.test.failure.ignore=true
+MAVEN_OPTS='-Xms2048m -Xmx2048m'& mvn --fail-at-end -Dmaven.test.skip=false clean org.jacoco:jacoco-maven-plugin:0.7.7.201606060606:prepare-agent  package -D=master-SNAPSHOT -D=master-SNAPSHOT -Dmaven.test.failure.ignore=true
 
 #下面是进行静态代码扫描， 并将代码覆盖率报告,单元测试报告 汇总到sonar平台上。
 mvn -f pom.xml -e -B sonar:sonar -Dsonar.sourceEncoding=UTF-8 -Dsonar.jdbc.url="jdbc:mysql://192.168.60.53:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance" -Dsonar.host.url=http://192.168.60.53:9000 -Dsonar.login=jenkins -Dsonar.password=jenkins -Dmogoroom-version=master-SNAPSHOT

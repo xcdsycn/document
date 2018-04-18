@@ -5,5 +5,7 @@ http://idea.imsxm.com
 
 http://idea.yangyusb.com
 
+http://xdouble.cn:8888/
+
 # pycharm
  http://idea.imsxm.com/
