@@ -5,3 +5,7 @@ scp -P40000  "root@192.168.60.81:/home/mogo/jenkins/app_java/message_platform/mg
 
 ```
 
+## change centos datetime
+```shell
+ntpdate cn.pool.ntp.org
+```
