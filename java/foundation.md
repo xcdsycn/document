@@ -32,3 +32,7 @@ HttpClient httpClient = HttpClients.custom()
                 .disableContentCompression() //this disables compression
                 .build();
 ```
+## mysql 更新时返回影响行数
+```
+jdbc.url=jdbc:mysql://ip:3306/yourdb?useUnicode=true&amp;characterEncoding=UTF-8&useAffectedRows=true
+```
