@@ -26,3 +26,31 @@ alter table xxxx add partition (partition p3 values less than(to_days('2019-06-0
 ```sql
 alter table xxx drop partition p3; 
 ```
+## 删除分区数据
+```sql
+alter table xxxxxx  truncate partition p1,p2;  
+alter table xxxxxx  truncate partition all; 
+```
+## 
+```sql
+alter table xxxxx reorganize partition p1,p3,p4 into (partition pm1 values less than(2006),  
+partition pm2 values less than(2011));  
+```alter  table xxxxxx analyze partition pm1/all;  
+##
+```sql
+alter  table xxxxxx rebuild partition pm1/all; //相当于drop所有记录，然后再reinsert；可以解决磁盘碎片  
+```
+##
+```sql
+alter  table tt2 optimize partition pm1; //在大量delete表数据后，可以回收空间和碎片整理。但在5.5.30后支持。在5.5.30之前可以通过recreate+analyze来替代，如果用rebuild+analyze速度慢  
+```
+##
+```sql
+alter  table xxxxxx analyze partition pm1/all;  
+alter  table xxxxxx check partition pm1/all;  
+show create table employees2;  //查看分区表的定义  
+show table status like 'employees2'\G;    //查看表时候是分区表 如“Create_options: partitioned”  
+select * from information_schema.KEY_COLUMN_USAGE where table_name='employees2';   //查看索引  
+SELECT * FROM information_schema.partitions WHERE table_name='employees2'   //查看分区表  
+explain partitions select * from employees2 where separated < '1990-01-01' or separated > '2016-01-01';   //查看分区是否被select使用  
+```
