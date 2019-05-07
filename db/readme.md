@@ -17,3 +17,12 @@
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='管理表';
 ```
+## 修改分区
+```sql
+alter table xxxx add partition (partition p3 values less than(to_days('2019-06-01'))); 
+```
+
+## 删除分区
+```sql
+alter table xxx drop partition p3; 
+```
