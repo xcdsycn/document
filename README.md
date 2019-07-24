@@ -15,21 +15,34 @@ Here is my daily study documents place.It will be classified with GIT,JENKINS,Mi
 
 ## GIT
 [常用 GIT 命令](git/commonCommand.md)
+
 [GIT Sub module 用法](git/git_submodule.md)
+
 [GIT 提交次数组统计](git/stasticTimesByCommitorOfRepository.md)
+
 [初台化 GIT 库](git/初始化GIT库.md)
+
 [推本地分支到远程](git/推本地分支到远程.md)
+
 [Git hooks](git/githooks.md)
+
 [Git 版本控制](git/gitVersionControll.md)
 
 ## java
 [java 基本问题](java/foundation.md)
+
 [log4j 配置文件相关问题](java/log4jConfig.md)
+
 [jvm 相关知识](java/jvm.md)
+
 [jdk安装设置](java/jdksetup.md)
+
 [关闭 jvm -- system.exit()](java/systemexit.md)
+
 [tomcat无法启动](tomcatError.md)
+
 [性能问题定位](java/performance.md)
+
 [单例模式中的延期加载](JavaSingletonClassCreateThreadSafe.md)
 
 ## microservice
@@ -38,10 +51,12 @@ Here is my daily study documents place.It will be classified with GIT,JENKINS,Mi
 
 ## shell
 [查看内存使用情况](shell/linuxmem.md)
+
 [生成RSA](shell/gen-rsa.sh)
 
 ## spring framework
 [spring 属性文件加载顺序](springframework/readme.md)
+
 [JSON验证](springframework/validator.md)
 
 
