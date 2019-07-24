@@ -30,7 +30,7 @@ Here is my daily study documents place.It will be classified with GIT,JENKINS,Mi
 [关闭 jvm -- system.exit()](java/systemexit.md)
 [tomcat无法启动](tomcatError.md)
 [性能问题定位](java/performance.md)
-[单例模式中的延期加载)(JavaSingletonClassCreateThreadSafe.md)
+[单例模式中的延期加载](JavaSingletonClassCreateThreadSafe.md)
 
 ## microservice
 [微服务设计](microservice/readme.md)
