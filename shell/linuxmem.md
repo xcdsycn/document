@@ -1,4 +1,4 @@
-# linux 查看内容使用情况
+# linux 查看内存使用情况
 ## 1 查看使用内存最多的20个进程
 ```
  ps aux | head -1;ps aux | grep -v PID | sort -rn -k +4 | head -20
