@@ -50,6 +50,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-c
 1. 用来存储指标、产生预警
 2. docker安装，在prom组织下
 3. 默认container内部
+
 ```
  配置文件:/etc/prometheus/prometheus.yml
  数据文件:/prometheus,用于存储指标数据
@@ -61,6 +62,7 @@ docker run -d -p 9090:9090 -v ~/prometheus/prometheus.yml:/etc/prometheus/promet
 ## 安装 node exporter
 1. 用于采集目标机器的数据
 2. 需要配置一下，不然采集的是container数据
+
 ```
 docker run -d -p 9100:9100 -v "/proc:/host/proc" -v "/sys:/host/sys" -v "/:/rootfs" --net="host" prom/node-exporter -collector.procfs /host/proc -collector.sysfs /host/proc -collector.filesystem.ignored-mount-points "^/(sys|proc|dev|host|etc)($|/)"
 ```
