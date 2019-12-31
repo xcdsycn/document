@@ -57,7 +57,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-c
 ```
 4. 修改默认配置的方式：传一个配置文件给docker
 
+```
 docker run -d -p 9090:9090 -v ~/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus -config.file=/etc/prometheus/prometheus.yml -storage.local.path=/prometheus -storage.local.memory-chunks=10000
+```
 
 ## 安装 node exporter
 1. 用于采集目标机器的数据
